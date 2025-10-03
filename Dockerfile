@@ -1,4 +1,4 @@
-FROM debian:trixie
+FROM debian:bookworm
 ARG optical_gid
 ARG uid=1000
 
