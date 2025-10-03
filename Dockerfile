@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -yV \
     python3-mutagen \
     python3-pil \
     python3-pip \
+    pipx \
     python3-ruamel.yaml \
     python3-setuptools \
     sox \
