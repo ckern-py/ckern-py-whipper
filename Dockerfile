@@ -1,8 +1,8 @@
-FROM debian:buster
+FROM debian:trixie
 ARG optical_gid
 ARG uid=1000
 
-RUN apt-get update && apt-get install --no-install-recommends -y -V \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     autoconf \
     automake \
     cdrdao \
