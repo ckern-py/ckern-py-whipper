@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -yV \
     sox \
     swig \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    && pipx --no-cache-dir install pycdio==2.1.0 discid
+    && pipx install pycdio==2.1.0
 
 # libcdio-paranoia / libcdio-utils are wrongfully packaged in Debian, thus built manually
 # see https://github.com/whipper-team/whipper/pull/237#issuecomment-367985625
