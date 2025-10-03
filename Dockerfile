@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -yV \
     make \
     pkgconf \
     python3-dev \
+    libcdio-dev \
+    swig pkg-config \
     python3-musicbrainzngs \
     python3-mutagen \
     python3-pil \
@@ -28,18 +30,19 @@ RUN apt-get update && apt-get install -yV \
     python3-setuptools \
     sox \
     swig \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/* \
+    && pip install pycdio
 
 # libcdio-paranoia / libcdio-utils are wrongfully packaged in Debian, thus built manually
 # see https://github.com/whipper-team/whipper/pull/237#issuecomment-367985625
-ENV LIBCDIO_VERSION=2.1.0
-RUN curl -o - "https://ftp.gnu.org/gnu/libcdio/libcdio-${LIBCDIO_VERSION}.tar.bz2" | tar jxf - \
-    && cd libcdio-${LIBCDIO_VERSION} \
-    && autoreconf -fi \
-    && ./configure --disable-dependency-tracking --disable-cxx --disable-example-progs --disable-static \
-    && make install \
-    && cd .. \
-    && rm -rf libcdio-${LIBCDIO_VERSION}
+# ENV LIBCDIO_VERSION=2.1.0
+# RUN curl -o - "https://ftp.gnu.org/gnu/libcdio/libcdio-${LIBCDIO_VERSION}.tar.bz2" | tar jxf - \
+#     && cd libcdio-${LIBCDIO_VERSION} \
+#     && autoreconf -fi \
+#     && ./configure --disable-dependency-tracking --disable-cxx --disable-example-progs --disable-static \
+#     && make install \
+#     && cd .. \
+#     && rm -rf libcdio-${LIBCDIO_VERSION}
 
 # Install cd-paranoia from tarball
 ENV LIBCDIO_PARANOIA_VERSION=10.2+2.0.1
