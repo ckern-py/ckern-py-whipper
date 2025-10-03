@@ -28,8 +28,7 @@ RUN apt-get update && apt-get install -yV \
     python3-setuptools \
     sox \
     swig \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    && pipx install pycdio==2.1.0
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # libcdio-paranoia / libcdio-utils are wrongfully packaged in Debian, thus built manually
 # see https://github.com/whipper-team/whipper/pull/237#issuecomment-367985625
