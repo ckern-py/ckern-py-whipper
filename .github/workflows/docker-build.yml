@@ -1,0 +1,26 @@
+name: Docker Build and Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  Docker-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout Project Code'
+      uses: actions/checkout@v4
+    - name: Set timestamp for tag
+      run: echo "TIME_TAG=$(date +%Y%m%d_%H%M%S)" >> "$GITHUB_ENV"
+    - name: 'Build and push image'
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build . -f Dockerfile --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/docker_ckern_py_whipper:whipper_TIME_TAG --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/docker_ckern_py_whipper:latest
+        docker push --all-tags ${{ secrets.REGISTRY_LOGIN_SERVER }}/docker_ckern_py_whipper
+
+    
